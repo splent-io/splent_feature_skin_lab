@@ -1,0 +1,197 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   skin_isia — course wiki for Ingeniería del Software, Artificial
+   Intelligence degree.
+
+   Deliberately a different family from the EGC skin. That one is a terminal:
+   dark chrome, monospace wordmark, crimson. This one is a paper: a serif
+   heading face, an indigo rule under the site name, plenty of white space.
+   Two products from one product line should each look like their own
+   subject, and the tokens alone do not achieve that.
+
+   Colour, faces and radius come from the theme's --brand-* tokens (set in
+   __init__.py), so this file only says what the tokens cannot express.
+   Loaded at asset order 200, after the theme base and after every feature,
+   so these rules win.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    color-scheme: light;
+
+    /* A tint of the primary, for blocks that need to sit apart from the
+       page without becoming a coloured box. */
+    --isia-wash: #f4f6fc;
+    --isia-rule: #dfe3f2;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────
+   Light, with the site name in the heading serif over an indigo rule. The
+   opposite of EGC's shell prompt on purpose. */
+
+body > header,
+.site-header {
+    background: var(--brand-bg);
+    border-bottom: 1px solid var(--brand-border);
+    box-shadow: none;
+}
+
+.site-header__brand,
+.navbar-brand {
+    font-family: var(--brand-font-heading);
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: var(--brand-heading);
+    text-decoration: none;
+    padding-bottom: .2rem;
+    border-bottom: 2px solid var(--brand-primary);
+}
+
+.site-header__brand:hover,
+.navbar-brand:hover {
+    color: var(--brand-primary);
+}
+
+.nav-link {
+    font-family: var(--brand-font-body);
+    color: var(--brand-text);
+}
+
+.nav-link:hover {
+    color: var(--brand-primary);
+}
+
+/* ── Headings ────────────────────────────────────────────────────────────
+   The serif is the whole identity, so it applies wherever a heading
+   appears, including inside rendered page bodies. */
+
+h1, h2, h3, h4,
+.prose h1, .prose h2, .prose h3, .prose h4,
+.courses-card__name,
+.courses-section__title,
+.courses-attachments__title {
+    font-family: var(--brand-font-heading);
+    letter-spacing: -0.01em;
+}
+
+/* A section rule in the primary rather than the neutral border, which is
+   the one place the indigo carries structure instead of decoration. */
+.prose h2,
+.courses-section__title {
+    border-bottom-color: var(--isia-rule);
+}
+
+/* ── Reading ─────────────────────────────────────────────────────────────
+   Slightly wider measure and taller leading than the feature default: this
+   material is read in long stretches, and the serif headings give the eye
+   enough structure to carry a longer line. */
+
+.prose {
+    max-width: 44rem;
+    line-height: 1.75;
+}
+
+.prose a {
+    color: var(--brand-primary);
+    text-decoration-thickness: 1px;
+}
+
+.prose a:hover {
+    color: var(--brand-accent);
+}
+
+.prose blockquote {
+    background: var(--isia-wash);
+    border-left-color: var(--brand-primary);
+    border-radius: 0 var(--brand-radius) var(--brand-radius) 0;
+    padding: .6rem 1rem;
+    color: var(--brand-text);
+}
+
+/* ── Code ────────────────────────────────────────────────────────────────
+   A software engineering course is mostly commands. Kept light here, unlike
+   EGC's editor-styled dark block, because the rest of this skin is paper. */
+
+.prose code {
+    background: var(--isia-wash);
+    color: var(--brand-accent);
+}
+
+.prose pre {
+    background: var(--isia-wash);
+    border: 1px solid var(--isia-rule);
+    border-left: 3px solid var(--brand-primary);
+}
+
+.prose pre code {
+    color: var(--brand-text);
+}
+
+/* ── Course listing ──────────────────────────────────────────────────────
+   Cards that read as a table of contents rather than as a grid of
+   products. */
+
+.courses-card {
+    background: var(--brand-bg);
+    border-left: 3px solid var(--isia-rule);
+    border-radius: var(--brand-radius);
+}
+
+.courses-card:hover,
+.courses-card:focus-visible {
+    border-left-color: var(--brand-primary);
+    border-color: var(--brand-border);
+    background: var(--isia-wash);
+    transform: none;
+}
+
+.courses-pages a:hover {
+    background: var(--isia-wash);
+}
+
+/* ── Attachments ─────────────────────────────────────────────────────────
+   The files are the material, so the block earns the accent. */
+
+.courses-attachments {
+    background: var(--isia-wash);
+    border-color: var(--isia-rule);
+}
+
+.courses-attachments a {
+    color: var(--brand-primary);
+}
+
+.courses-attachments a:hover {
+    color: var(--brand-accent);
+}
+
+/* ── The Withheld badge ──────────────────────────────────────────────────
+   Staff see this constantly while a course is being prepared, so it has to
+   be legible at a glance and never alarming. */
+
+.courses-badge--scheduled {
+    border-color: var(--brand-accent);
+    color: var(--brand-accent);
+    background: #ffffff;
+}
+
+/* ── Search ──────────────────────────────────────────────────────────────*/
+
+.courses-search input[type="search"],
+.courses-search input[type="text"] {
+    border-radius: var(--brand-radius);
+}
+
+.courses-search input[type="search"]:focus,
+.courses-search input[type="text"]:focus {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 1px;
+    border-color: var(--brand-primary);
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────────*/
+
+.prose th {
+    background: var(--isia-wash);
+    font-family: var(--brand-font-heading);
+    font-weight: 600;
+}
