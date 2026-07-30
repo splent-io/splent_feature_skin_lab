@@ -3,10 +3,16 @@
    Intelligence degree.
 
    Deliberately a different family from the EGC skin. That one is a terminal:
-   dark chrome, monospace wordmark, crimson. This one is a paper: a serif
-   heading face, an indigo rule under the site name, plenty of white space.
-   Two products from one product line should each look like their own
-   subject, and the tokens alone do not achieve that.
+   dark chrome, monospace wordmark, crimson. This one belongs to the field it
+   is taught in, and does it without any of the things that usually stand in
+   for that field. No neon on black, no glow, no gradient behind the text: a
+   course wiki is read end to end, in a lab, on whatever screen is to hand,
+   and each of those costs legibility for an impression.
+
+   What carries the identity is restraint and a single signal. The page is
+   paper so the material reads; violet and cyan meet in exactly one place,
+   the hairline under the header, which is the site's signature. Everywhere
+   else one colour does one job.
 
    Colour, faces and radius come from the theme's --brand-* tokens (set in
    __init__.py), so this file only says what the tokens cannot express.
@@ -19,31 +25,67 @@
 
     /* A tint of the primary, for blocks that need to sit apart from the
        page without becoming a coloured box. */
-    --isia-wash: #f4f6fc;
-    --isia-rule: #dfe3f2;
+    --isia-wash: #f5f4fe;
+    --isia-rule: #e4e1f8;
+    /* The other end of the signature. Named rather than inlined because it
+       appears in three places and has to be the same cyan in all of them. */
+    --isia-signal: #06b6d4;
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────
-   Light, with the site name in the heading serif over an indigo rule. The
-   opposite of EGC's shell prompt on purpose. */
+   Light, with the site name in the geometric face over the one gradient in
+   the whole skin: a two-pixel hairline from violet to cyan, the width of
+   the page. It is the signature, and it is two pixels tall because that is
+   all a signature needs. */
 
 body > header,
 .site-header {
     background: var(--brand-bg);
-    border-bottom: 1px solid var(--brand-border);
+    border-bottom: 0;
     box-shadow: none;
+    position: relative;
+}
+
+body > header::after,
+.site-header::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-primary) 0%,
+        var(--isia-signal) 60%,
+        color-mix(in srgb, var(--isia-signal) 25%, transparent) 100%
+    );
 }
 
 .site-header__brand,
-.navbar-brand {
+.navbar-brand,
+.site-brand__name {
     font-family: var(--brand-font-heading);
-    font-weight: 600;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    font-size: 1.3rem;
+    /* Tight, which is what a geometric face is drawn for. */
+    letter-spacing: -0.025em;
     color: var(--brand-heading);
     text-decoration: none;
-    padding-bottom: .2rem;
-    border-bottom: 2px solid var(--brand-primary);
+    border-bottom: 0;
+}
+
+/* The dot that used to be an indigo underline. A single filled square in
+   the signal colour, set before the name: the smallest possible mark, and
+   the one thing a reader will remember the site by. */
+.site-brand__name::before {
+    content: "";
+    display: inline-block;
+    width: .45rem;
+    height: .45rem;
+    margin-inline-end: .5rem;
+    vertical-align: middle;
+    background: var(--brand-primary);
+    box-shadow: .3rem 0 0 var(--isia-signal);
 }
 
 .site-header__brand:hover,
@@ -61,8 +103,10 @@ body > header,
 }
 
 /* ── Headings ────────────────────────────────────────────────────────────
-   The serif is the whole identity, so it applies wherever a heading
-   appears, including inside rendered page bodies. */
+   The geometric face carries the identity, so it applies wherever a heading
+   appears, including inside rendered page bodies. Tightened, because a
+   grotesk set at default tracking reads as a website and this is meant to
+   read as documentation. */
 
 h1, h2, h3, h4,
 .prose h1, .prose h2, .prose h3, .prose h4,
@@ -70,7 +114,8 @@ h1, h2, h3, h4,
 .courses-section__title,
 .courses-attachments__title {
     font-family: var(--brand-font-heading);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    font-weight: 600;
 }
 
 /* A section rule in the primary rather than the neutral border, which is
@@ -81,9 +126,8 @@ h1, h2, h3, h4,
 }
 
 /* ── Reading ─────────────────────────────────────────────────────────────
-   Slightly wider measure and taller leading than the feature default: this
-   material is read in long stretches, and the serif headings give the eye
-   enough structure to carry a longer line. */
+   A measure narrower than the container and taller leading than the feature
+   default: this material is read in long stretches rather than skimmed. */
 
 .prose {
     max-width: 44rem;

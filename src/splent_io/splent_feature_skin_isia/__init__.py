@@ -4,38 +4,51 @@ skin_isia_bp = create_blueprint(__name__)
 
 # Ingeniería del Software for the Artificial Intelligence degree.
 #
-# The subject is taught in a young degree and the material is read as
-# documentation, so this leans academic and quiet rather than institutional:
-# a deep indigo that reads as engineering without being corporate blue, a
-# teal accent for the things a reader acts on, and warm neutrals so long
-# stretches of prose do not glare. It is deliberately a different family
-# from the EGC skin, because the point of two products from one line is that
-# each looks like its own subject.
+# This is the subject's own identity, not a recolour of the other wiki. EGC
+# is a terminal: dark chrome, monospace wordmark, crimson. This one reads as
+# the field it is taught in, without any of the things that usually stand in
+# for it. No neon on black, no glow, no gradient wash behind the text: a
+# course wiki is read end to end, in a lab, on whatever screen is to hand,
+# and every one of those costs legibility for an impression.
+#
+# What carries it instead is restraint and one signal. The page stays paper
+# so the material is readable; the accents are an electric violet and a
+# cyan, the two colours the field actually uses in its own tools and papers,
+# and they appear together only in the hairline under the header, which is
+# the site's signature and the one place a gradient earns its keep.
+#
+# The faces are geometric rather than serif: Space Grotesk is drawn for
+# technical writing and is what the field's own documentation is set in, and
+# the mono is kept for anything the reader is meant to type.
 ISIA_TOKENS = {
-    "primary": "#2c3e8f",
+    # Electric violet. Reads as the field without being a toy, and holds
+    # 7.1:1 against white, so it can carry body links and not only fills.
+    "primary": "#4c2fd7",
     "primary_contrast": "#ffffff",
-    # Teal, used where something is actionable or worth noticing. Chosen to
-    # keep contrast against both the page and the indigo.
-    "accent": "#0f766e",
+    # Cyan, the other half of the signature. Used where something is live or
+    # worth noticing, and darkened from the screen-native cyan so it stays
+    # legible as text rather than only as a fill.
+    "accent": "#0e7490",
     "bg": "#ffffff",
-    # Very slightly warm, which is easier on the eye than a blue-grey when
-    # the page is mostly text.
-    "surface": "#f7f7f5",
-    "text": "#33333a",
-    "heading": "#1b2340",
-    "muted": "#6b7280",
-    "border": "#e3e3e0",
-    # Softer than EGC's, to match a less angular identity.
-    "radius": "8px",
+    # Cool rather than warm, which is what keeps the page from reading as
+    # the other wiki's paper.
+    "surface": "#f7f7fb",
+    "text": "#2e2e38",
+    "heading": "#16162b",
+    "muted": "#6b6b7b",
+    "border": "#e5e5ee",
+    # Tighter than before. Rounded corners read as a consumer app; this
+    # material is documentation.
+    "radius": "6px",
     "container": "1120px",
-    "font_body": "'Source Sans 3', system-ui, sans-serif",
-    "font_heading": "'Source Serif 4', Georgia, serif",
+    "font_body": "'Inter', system-ui, sans-serif",
+    "font_heading": "'Space Grotesk', 'Inter', system-ui, sans-serif",
     "font_display": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
     "font_url": (
         "https://fonts.googleapis.com/css2"
         "?family=JetBrains+Mono:wght@400;500;600"
-        "&family=Source+Sans+3:wght@400;500;600;700"
-        "&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700"
+        "&family=Inter:wght@400;500;600;700"
+        "&family=Space+Grotesk:wght@500;600;700"
         "&display=swap"
     ),
 }

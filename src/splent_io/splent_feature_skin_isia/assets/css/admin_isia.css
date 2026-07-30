@@ -1,0 +1,87 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   ISIA — the back office, in the same colours as the front.
+
+   ── Why there is not a single !important below ────────────────────────────
+   The product's own.css already styles this shell, with !important on nearly
+   every declaration, so restating its rules would lose however late this
+   loaded. It does not need to: own.css is written against a set of --s-*
+   variables and never hardcodes a colour, so re-pointing those changes
+   everything it draws, in one place, and keeps every layout decision it has
+   already made. It is also the only version of this that survives own.css
+   being rewritten.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* The chrome. Near-black with a violet cast rather than the shell's
+       slate, so it belongs to this identity without becoming a colour. */
+    --s-sidebar-bg: #16162b;
+    --s-sidebar-text: #9a9ab5;
+    --s-sidebar-text-active: #ffffff;
+    --s-sidebar-active: color-mix(in srgb, var(--brand-primary) 30%, transparent);
+    --s-sidebar-hover: color-mix(in srgb, #ffffff 6%, transparent);
+
+    --s-primary: var(--brand-primary);
+    --s-primary-hover: #3a22ab;
+    --s-primary-soft: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+
+    --s-bg: var(--brand-surface);
+    --s-surface: var(--brand-bg);
+    --s-surface-hover: var(--brand-surface);
+    --s-border: var(--brand-border);
+    --s-text: var(--brand-text);
+    --s-text-secondary: var(--brand-muted);
+
+    --s-radius: var(--brand-radius);
+    --s-radius-sm: calc(var(--brand-radius) * .6);
+    --s-radius-lg: calc(var(--brand-radius) * 1.6);
+}
+
+/* Bootstrap 5.3 draws each button from component-scoped variables rather
+   than from --bs-primary, so the app colour above does not reach them on its
+   own. Naming them here is also what keeps hover and focus in step. */
+.btn-primary {
+    --bs-btn-bg: var(--brand-primary);
+    --bs-btn-border-color: var(--brand-primary);
+    --bs-btn-hover-bg: #3a22ab;
+    --bs-btn-hover-border-color: #3a22ab;
+    --bs-btn-active-bg: #331d99;
+    --bs-btn-active-border-color: #331d99;
+    --bs-btn-disabled-bg: var(--brand-primary);
+    --bs-btn-disabled-border-color: var(--brand-primary);
+    --bs-btn-focus-shadow-rgb: 76, 47, 215;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--brand-primary);
+    --bs-btn-border-color: var(--brand-primary);
+    --bs-btn-hover-bg: var(--brand-primary);
+    --bs-btn-hover-border-color: var(--brand-primary);
+    --bs-btn-active-bg: var(--brand-primary);
+    --bs-btn-active-border-color: var(--brand-primary);
+    --bs-btn-focus-shadow-rgb: 76, 47, 215;
+}
+
+:root {
+    --bs-link-color: var(--brand-primary);
+    --bs-link-color-rgb: 76, 47, 215;
+    --bs-link-hover-color: #3a22ab;
+    --bs-focus-ring-color: color-mix(in srgb, var(--brand-primary) 25%, transparent);
+}
+
+/* The mark the public header carries, so the two brands read as one site:
+   a filled square in the primary with the signal cyan beside it. */
+.sidebar-brand {
+    font-family: var(--brand-font-heading);
+    letter-spacing: -.025em;
+}
+
+.sidebar-brand::before {
+    content: "";
+    display: inline-block;
+    width: .45rem;
+    height: .45rem;
+    margin-inline-end: .8rem;
+    vertical-align: middle;
+    background: var(--brand-primary);
+    box-shadow: .3rem 0 0 #06b6d4;
+}
