@@ -12,13 +12,16 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-    /* The chrome. Near-black with a violet cast rather than the shell's
-       slate, so it belongs to this identity without becoming a colour. */
-    --s-sidebar-bg: #16162b;
-    --s-sidebar-text: #9a9ab5;
-    --s-sidebar-text-active: #ffffff;
-    --s-sidebar-active: color-mix(in srgb, var(--brand-primary) 30%, transparent);
-    --s-sidebar-hover: color-mix(in srgb, #ffffff 6%, transparent);
+    /* The sidebar is white, on purpose. A dark rail beside pages of white
+       forms and tables split the panel into two competing halves and hid
+       whatever own.css had hardcoded for light-on-dark. White with dark
+       text keeps the whole panel one surface, and the violet is spent
+       where it means something: the active item and the buttons. */
+    --s-sidebar-bg: #ffffff;
+    --s-sidebar-text: var(--brand-text);
+    --s-sidebar-text-active: var(--brand-heading);
+    --s-sidebar-active: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+    --s-sidebar-hover: var(--brand-surface);
 
     --s-primary: var(--brand-primary);
     --s-primary-hover: #3a22ab;
@@ -84,4 +87,24 @@
     vertical-align: middle;
     background: var(--brand-primary);
     box-shadow: .3rem 0 0 #06b6d4;
+}
+
+/* own.css wrote three values for a dark rail straight into its rules, with
+   !important, so on a white one they turn into white on white: the brand
+   name, the active item, and a border nobody can see. Only these three push
+   back with !important of their own; everything else above goes through the
+   variables own.css was written against. */
+.sidebar-brand {
+    color: var(--brand-heading) !important;
+    border-bottom-color: var(--brand-border);
+}
+
+.sidebar-item.active > .sidebar-link,
+.sidebar-link.active {
+    color: var(--brand-primary) !important;
+    font-weight: 600 !important;
+}
+
+.sidebar {
+    border-right: 1px solid var(--brand-border) !important;
 }

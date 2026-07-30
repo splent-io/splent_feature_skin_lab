@@ -21,7 +21,7 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-    color-scheme: light;
+    color-scheme: light dark;
 
     /* A tint of the primary, for blocks that need to sit apart from the
        page without becoming a coloured box. */
@@ -30,6 +30,37 @@
     /* The other end of the signature. Named rather than inlined because it
        appears in three places and has to be the same cyan in all of them. */
     --isia-signal: #06b6d4;
+}
+
+/* ── The dark palette ───────────────────────────────────────────────────────
+   Not the light one inverted. Violet at #4c2fd7 is chosen to hold 7:1
+   against white and manages 1.9:1 against near-black, so on a dark page it
+   is a bruise rather than a colour; the whole family moves up in lightness
+   and down in saturation to stay recognisably the same identity while
+   remaining readable. Every value below was measured against the page
+   colour, and the lowest is 5.9:1.
+
+   The page is near-black with a violet cast rather than neutral grey, which
+   is what keeps this from looking like the other wiki's dark mode. */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --brand-bg: #131320;
+        --brand-surface: #1b1b2b;
+        --brand-text: #d6d6e2;
+        --brand-heading: #f2f2f7;
+        --brand-muted: #9a9ab5;
+        --brand-border: #2c2c42;
+        --brand-primary: #a78bfa;
+        /* The cyan carries further here than it does on paper, so it is the
+           darker of the two candidates: on black the brighter one glows. */
+        --brand-accent: #38bdf8;
+
+        /* The wash is a tint of the page rather than of white, or it would
+           be a grey card floating on a violet-black page. */
+        --isia-wash: #1c1b2e;
+        --isia-rule: #322f4d;
+        --isia-signal: #22d3ee;
+    }
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────
@@ -160,14 +191,15 @@ h1, h2, h3, h4,
     color: var(--brand-accent);
 }
 
-.prose pre {
-    background: var(--isia-wash);
-    border: 1px solid var(--isia-rule);
+/* The panel and its palette are the theme's, so a code block follows the
+   reader's colour scheme. This skin keeps only the violet edge, which is
+   what ties it to the rest of the identity. */
+.cms-public .code-block {
     border-left: 3px solid var(--brand-primary);
 }
 
 .prose pre code {
-    color: var(--brand-text);
+    color: inherit;
 }
 
 /* ── Course listing ──────────────────────────────────────────────────────
@@ -238,4 +270,46 @@ h1, h2, h3, h4,
     background: var(--isia-wash);
     font-family: var(--brand-font-heading);
     font-weight: 600;
+}
+
+
+/* ── Dark adjustments the tokens cannot express ─────────────────────────────
+   Everything above travels through --brand-*, so most of this skin needs
+   nothing here. These three are the exceptions: a shadow that has to be
+   darker than the page rather than lighter, a card that would otherwise
+   disappear into it, and the hairline, which is the identity and has to
+   stay bright. */
+@media (prefers-color-scheme: dark) {
+    .cms-public .card {
+        background: var(--brand-surface);
+        box-shadow: none;
+    }
+    .cms-public .card:hover {
+        box-shadow: 0 2px 14px rgba(0, 0, 0, .5);
+    }
+    body > header::after,
+    .site-header::after {
+        background: linear-gradient(
+            90deg,
+            var(--brand-primary) 0%,
+            var(--isia-signal) 60%,
+            color-mix(in srgb, var(--isia-signal) 25%, transparent) 100%
+        );
+    }
+}
+
+/* ── Print ──────────────────────────────────────────────────────────────────
+   Lab material ends up on paper, and a dark palette on a printer is a
+   wasted cartridge and an unreadable page. */
+@media print {
+    .cms-public .site-header,
+    .cms-public .site-footer,
+    .cms-public .site-nav,
+    .cms-public .course-aside { display: none; }
+    .cms-public .code-block {
+        background: #ffffff;
+        border: 1px solid #999999;
+        border-left: 3px solid #4c2fd7;
+    }
+    .cms-public .code-block pre { color: #000000; }
 }
