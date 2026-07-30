@@ -3,7 +3,7 @@ requires = ["setuptools>=80.3.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "splent_feature_skin_isia"
+name = "splent_feature_skin_lab"
 version = "0.1.1"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -30,7 +30,7 @@ cli_version = "1.15.0"
 # and provides.routes_manual (routes built from configuration at
 # registration time, which have no literal path to find in source).
 [tool.splent.contract]
-description = "skin_isia feature"
+description = "skin_lab feature"
 archetype = "config"
 
 [tool.splent.contract.provides]

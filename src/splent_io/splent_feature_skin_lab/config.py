@@ -1,10 +1,10 @@
 """
-skin_isia feature configuration.
+skin_lab feature configuration.
 
 Injects environment variables into Flask app.config.
 Add your feature's env vars here so the framework can track them.
 
-To regenerate from source code: splent feature:inject-config splent_feature_skin_isia
+To regenerate from source code: splent feature:inject-config splent_feature_skin_lab
 """
 
 import os  # noqa: F401 — used when adding env vars below

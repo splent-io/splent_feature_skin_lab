@@ -28,7 +28,7 @@ def admin_stylesheet():
     from splent_io.splent_feature_theme.tokens import get_tokens, tokens_to_css
 
     tokens = tokens_to_css(get_tokens(current_app))
-    href = url_for("skin_isia.assets", subfolder="css", filename="admin_isia.css")
+    href = url_for("skin_lab.assets", subfolder="css", filename="admin_lab.css")
     return Markup(
         f'<style id="brand-tokens">{tokens}</style>'
         f'<link rel="stylesheet" href="{href}">'

@@ -1,6 +1,6 @@
 from splent_framework.blueprints.base_blueprint import create_blueprint
 
-skin_isia_bp = create_blueprint(__name__)
+skin_lab_bp = create_blueprint(__name__)
 
 # Ingeniería del Software for the Artificial Intelligence degree.
 #
@@ -63,10 +63,10 @@ def init_feature(app):
     app.config["THEME_TOKENS"] = ISIA_TOKENS
     register_asset(
         "css",
-        "skin_isia.assets",
+        "skin_lab.assets",
         order=200,
         subfolder="css",
-        filename="skin_isia.css",
+        filename="skin_lab.css",
     )
 
 

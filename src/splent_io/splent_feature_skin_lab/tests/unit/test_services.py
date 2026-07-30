@@ -1,5 +1,5 @@
 """
-Tests for splent_feature_skin_isia.
+Tests for splent_feature_skin_lab.
 
 A skin is a config feature: it registers no routes, it publishes design
 tokens and one stylesheet the theme cascades after its own. So what is
@@ -9,7 +9,7 @@ other one rather than a copy with two colours changed.
 """
 
 from splent_framework.assets.asset_registry import get_assets
-from splent_io.splent_feature_skin_isia import ISIA_TOKENS
+from splent_io.splent_feature_skin_lab import ISIA_TOKENS
 
 
 def test_tokens_are_published_to_the_theme(test_client):
@@ -22,10 +22,10 @@ def test_stylesheet_is_registered_last(test_client):
     # empty.
     with test_client.application.test_request_context():
         urls = get_assets("css")
-    assert any("skin_isia.css" in url for url in urls)
+    assert any("skin_lab.css" in url for url in urls)
     # Order 200, so it cascades after the theme base and after every
     # feature stylesheet. That is what makes a skin a skin.
-    assert "skin_isia.css" in urls[-1]
+    assert "skin_lab.css" in urls[-1]
 
 
 def test_every_token_the_theme_expects_is_provided():
